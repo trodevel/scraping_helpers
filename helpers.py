@@ -125,7 +125,7 @@ def find_element_by_tag_name_and_attribute_name( driver, tag_name, attribute_nam
                 print( "DEBUG: find_element_by_tag_name_and_attribute_name: FOUND - {}".format( i_val ) )
                 return i
         else:
-            if i_val.startswith( attribute_val ):
+            if attribute_val in i_val:
                 print( "DEBUG: find_element_by_tag_name_and_attribute_name: FOUND - {} ".format( i_val ) )
                 return i
 
