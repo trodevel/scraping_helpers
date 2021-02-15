@@ -129,7 +129,9 @@ def find_element_by_tag_name_and_attribute_name( driver, tag_name, attribute_nam
                 print( "DEBUG: find_element_by_tag_name_and_attribute_name: FOUND - {} ".format( i_val ) )
                 return i
 
-    return None;
+    print( "DEBUG: find_element_by_tag_name_and_attribute_name: not found - tag '{}' attr '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
+
+    return None
 
 def find_element_by_tag_and_class_name( driver, tag_name, class_name, is_whole_name = True ):
 
