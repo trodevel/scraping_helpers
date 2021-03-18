@@ -104,6 +104,15 @@ def does_css_selector_exist( parent, name ):
 
     return False
 
+def does_xpath_exist( parent, name ):
+
+    elems = parent.find_elements_by_xpath( name )
+
+    if len( elems ) > 0 :
+        return True
+
+    return False
+
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
