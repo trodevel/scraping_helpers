@@ -6,7 +6,7 @@ import time
 
 ##########################################################
 
-def init_driver( driver_path, binary_location = "" ):
+def init_driver( driver_path, binary_location = "", cookie_dir = "" ):
     options = webdriver.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
     options.add_argument("--disable-blink-features=AutomationControlled")
@@ -16,6 +16,9 @@ def init_driver( driver_path, binary_location = "" ):
 
     if binary_location:
         options.binary_location = binary_location
+
+    if cookie_dir:
+        options.add_argument( "user-data-dir=" + cookie_dir )
 
     driver = webdriver.Chrome( options=options, executable_path=driver_path )
 
