@@ -113,6 +113,14 @@ def does_xpath_exist( parent, name ):
 
     return False
 
+def do_xpaths_exist( parent, names ):
+
+    for i in names:
+        if does_xpath_exist( parent, i ):
+            return True, i
+
+    return False, None
+
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
