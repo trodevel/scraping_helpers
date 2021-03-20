@@ -113,6 +113,23 @@ def does_xpath_exist( parent, name ):
 
     return False
 
+def does_xpath_exist_with_timeout( parent, name, timeout ):
+    i = 0
+
+    print( "DEBUG: waiting ", end='', flush=True  );
+
+    while i <= timeout:
+        res = does_xpath_exist( parent, name )
+        if res:
+            print()
+            print( "DEBUG: loaded element in {} sec".format( i ) )
+            return res
+
+        i += 1
+        sleep( 1, False )
+
+    return False
+
 def do_xpaths_exist( parent, names ):
 
     i = 0
