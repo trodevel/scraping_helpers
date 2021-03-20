@@ -123,6 +123,23 @@ def do_xpaths_exist( parent, names ):
 
     return False, None, 0
 
+def do_xpaths_exist_with_timeout( parent, names, timeout ):
+    i = 0
+
+    print( "DEBUG: waiting ", end='', flush=True  );
+
+    while i <= timeout:
+        res = do_xpaths_exist( parent, names )
+        if res[0]:
+            print()
+            print( "DEBUG: loaded element in {} sec".format( i ) )
+            return res
+
+        i += 1
+        sleep( 1, False )
+
+    return False, None, 0
+
 def find_element_by_xpath_with_timeout( parent, name, timeout ):
     i = 0
 
@@ -139,23 +156,6 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
 
     print( "FATAL: cannot load element in {} sec".format( timeout ) )
     exit()
-
-def find_elements_by_xpath_with_timeout( parent, names, timeout ):
-    i = 0
-
-    print( "DEBUG: waiting ", end='', flush=True  );
-
-    while i <= timeout:
-        res = do_xpaths_exist( parent, names )
-        if res[0]:
-            print()
-            print( "DEBUG: loaded element in {} sec".format( i ) )
-            return res
-
-        i += 1
-        sleep( 1, False )
-
-    return False, None, 0
 
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
