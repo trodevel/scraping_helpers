@@ -173,7 +173,7 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
         i += 1
         sleep( 1, False )
 
-    print( "FATAL: cannot load element in {} sec".format( timeout ) )
+    print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
     exit()
 
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
