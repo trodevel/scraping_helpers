@@ -6,10 +6,16 @@ import time
 
 ##########################################################
 
-def init_driver( driver_path, binary_location = "", cookie_dir = "" ):
+def init_driver( driver_path, binary_location = "", cookie_dir = "", is_headless = False ):
     options = webdriver.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
     options.add_argument("--disable-blink-features=AutomationControlled")
+
+    if is_headless:
+        options.add_argument("--no-sandbox")
+        options.add_argument("--headless")
+        options.add_argument("disable-gpu")
+        options.add_argument("window-size=1024,768")
 
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option('useAutomationExtension', False)
