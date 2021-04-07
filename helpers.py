@@ -202,6 +202,12 @@ def wait_till_clickable( parent, timeout ):
     print( "FATAL: element is not clickable in {} sec".format( timeout ) )
     exit()
 
+def wait_till_clickable_and_click( parent, timeout ):
+
+    wait_till_clickable( parent, timeout )
+
+    parent.click()
+
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
