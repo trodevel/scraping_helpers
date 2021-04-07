@@ -122,7 +122,7 @@ def does_xpath_exist( parent, name ):
 def does_xpath_exist_with_timeout( parent, name, timeout ):
     i = 0
 
-    print( "DEBUG: waiting ", end='', flush=True );
+    print( "DEBUG: waiting till loaded ", end='', flush=True );
 
     while i <= timeout:
         res = does_xpath_exist( parent, name )
@@ -150,7 +150,7 @@ def do_xpaths_exist( parent, names ):
 def do_xpaths_exist_with_timeout( parent, names, timeout ):
     i = 0
 
-    print( "DEBUG: waiting ", end='', flush=True );
+    print( "DEBUG: waiting till loaded ", end='', flush=True );
 
     while i <= timeout:
         res = do_xpaths_exist( parent, names )
