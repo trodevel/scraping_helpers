@@ -182,6 +182,26 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
     print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
     exit()
 
+def is_clickable( parent ):
+    return parent.is_enabled() and parent.is_displayed()
+
+def wait_till_clickable( parent, timeout ):
+    i = 0
+
+    print( "DEBUG: waiting ", end='', flush=True  );
+
+    while i <= timeout:
+        if is_clickable( parent ):
+            print()
+            print( "DEBUG: element is clickable in {} sec".format( i ) )
+            return
+
+        i += 1
+        sleep( 1, False )
+
+    print( "FATAL: element is not clickable in {} sec".format( timeout ) )
+    exit()
+
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
