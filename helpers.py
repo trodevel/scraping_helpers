@@ -188,7 +188,7 @@ def is_clickable( parent ):
 def wait_till_clickable( parent, timeout ):
     i = 0
 
-    print( "DEBUG: waiting ", end='', flush=True  );
+    print( "DEBUG: waiting till clickable", end='', flush=True  );
 
     while i <= timeout:
         if is_clickable( parent ):
