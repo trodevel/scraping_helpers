@@ -263,3 +263,12 @@ def to_csv_conform_string( s, separator = ';' ):
         return '"' + quote_quotes( s ) + '"'
 
     return s
+
+##########################################################
+
+def harmonize_link( link ):
+
+    if link.endswith('/'):
+        return link
+
+    return link + '/'
