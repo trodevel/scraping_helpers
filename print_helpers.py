@@ -47,9 +47,9 @@ def print_info( s ):
 
 ##########################################################
 
-def print_debug( s ):
+def print_debug( s, end_par = "\n", flush_par = False ):
     pref = colored( 'DEBUG: ' + s, 'grey', attrs=['bold'] )
-    print( pref )
+    print( pref, end=end_par, flush=flush_par )
 
 ##########################################################
 
