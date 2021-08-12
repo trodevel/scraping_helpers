@@ -126,7 +126,7 @@ def does_xpath_exist( parent, name ):
 def does_xpath_exist_with_timeout( parent, name, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", end='', flush=True );
+    print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         res = does_xpath_exist( parent, name )
@@ -154,7 +154,7 @@ def do_xpaths_exist( parent, names ):
 def do_xpaths_exist_with_timeout( parent, names, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", end='', flush=True );
+    print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         res = do_xpaths_exist( parent, names )
@@ -172,7 +172,7 @@ def do_xpaths_exist_with_timeout( parent, names, timeout ):
 def find_element_by_xpath_with_timeout( parent, name, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", end='', flush=True  );
+    print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         if does_xpath_exist( parent, name ):
@@ -192,7 +192,7 @@ def is_clickable( parent ):
 def wait_till_clickable( parent, timeout ):
     i = 0
 
-    print_debug( "waiting till clickable ", end='', flush=True  );
+    print_debug( "waiting till clickable ", '', True );
 
     while i <= timeout:
         if is_clickable( parent ):
