@@ -57,7 +57,7 @@ def wait_for_page_load_v1( driver, timeout=20 ):
 
     i = 0
 
-    print_debug( "waiting ", end='', flush=True  );
+    print_debug( "waiting ", '', True );
 
     while i <= timeout:
         if has_page_loaded( driver ):
