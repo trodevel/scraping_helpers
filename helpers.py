@@ -186,6 +186,23 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
     print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
     exit()
 
+def find_elements_by_xpath_with_timeout( parent, name, timeout ):
+    i = 0
+
+    print_debug( "waiting till loaded ", '', True );
+
+    while i <= timeout:
+        if does_xpath_exist( parent, name ):
+            print()
+            print_debug( "loaded element in {} sec".format( i ) )
+            return parent.find_elements_by_xpath( name )
+
+        i += 1
+        sleep( 1, False )
+
+    print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
+    exit()
+
 def is_clickable( parent ):
     return parent.is_enabled() and parent.is_displayed()
 
