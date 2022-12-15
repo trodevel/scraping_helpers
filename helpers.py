@@ -273,9 +273,9 @@ def dump_elements_by_tag_name( driver, tag_name ):
 
     #print( "dump_elements_by_tag_name: tag '{}', found {} element(s):".format( tag_name, len( all_elems ) ) )
 
-    for i in all_elems:
-        pass
-        #print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
+    #for i in all_elems:
+    #    pass
+    #    print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
 
 def quote_quotes( s ):
     res = s.replace( '"', '""' )
