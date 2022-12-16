@@ -96,6 +96,10 @@ def clean_up_and_type_text( element, text: str ):
     element.send_keys( Keys.DELETE )
     element.send_keys( text )
 
+def type_tab( element ):
+
+    element.send_keys( Keys.TAB )
+
 ##########################################################
 
 def does_class_exist( parent, class_name ):
