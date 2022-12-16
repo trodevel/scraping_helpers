@@ -89,6 +89,14 @@ def wait_for_page_load( driver, timeout=20 ):
 
 ##########################################################
 
+def clean_up_and_type_text( element, text: str ):
+
+    element.send_keys( Keys.CONTROL + "a" )
+    element.send_keys( Keys.DELETE )
+    element.send_keys( text )
+
+##########################################################
+
 def does_class_exist( parent, class_name ):
 
     elems = parent.find_elements_by_class_name( class_name )
