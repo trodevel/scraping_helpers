@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from selenium import webdriver
-from print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
+#from print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
 
@@ -38,9 +38,11 @@ def init_driver( driver_path, binary_location = "", cookie_dir = "", is_headless
 
 def sleep( sec, verbose = True ):
     if verbose:
-        print( "sleeping {} sec".format( sec ) )
+        pass
+        #print( "sleeping {} sec".format( sec ) )
     else:
-        print( '.', end='', flush=True )
+        pass
+        #print( '.', end='', flush=True )
 
     time.sleep( sec )
 
@@ -57,24 +59,24 @@ def wait_for_page_load_v1( driver, timeout=20 ):
 
     i = 0
 
-    print_debug( "waiting ", '', True );
+    #print_debug( "waiting ", '', True );
 
     while i <= timeout:
         if has_page_loaded( driver ):
-            print()
-            print_debug( "loaded page in {} sec".format( i ) )
+            #print()
+            #print_debug( "loaded page in {} sec".format( i ) )
             return
         i += 1
         sleep( 1, False )
 
-    print( "FATAL: cannot load page in {} sec".format( timeout ) )
+    #print( "FATAL: cannot load page in {} sec".format( timeout ) )
     exit()
 
 ##########################################################
 
 def wait_for_page_load_v3( driver, timeout=20 ):
 
-    print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
+    #print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
     old_page = driver.find_element_by_tag_name('html')
     yield
     WebDriverWait(driver, timeout).until(staleness_of(old_page))
@@ -126,19 +128,19 @@ def does_xpath_exist( parent, name ):
 def does_xpath_exist_with_timeout( parent, name, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", '', True );
+    #print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         res = does_xpath_exist( parent, name )
         if res:
-            print()
-            print_debug( "loaded element in {} sec".format( i ) )
+            #print()
+            #print_debug( "loaded element in {} sec".format( i ) )
             return res
 
         i += 1
         sleep( 1, False )
 
-    print()
+    #print()
     return False
 
 def do_xpaths_exist( parent, names ):
@@ -154,53 +156,53 @@ def do_xpaths_exist( parent, names ):
 def do_xpaths_exist_with_timeout( parent, names, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", '', True );
+    #print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         res = do_xpaths_exist( parent, names )
         if res[0]:
-            print()
-            print_debug( "loaded element in {} sec".format( i ) )
+            #print()
+            #print_debug( "loaded element in {} sec".format( i ) )
             return res
 
         i += 1
         sleep( 1, False )
 
-    print()
+    #print()
     return False, None, 0
 
 def find_element_by_xpath_with_timeout( parent, name, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", '', True );
+    #print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         if does_xpath_exist( parent, name ):
-            print()
-            print_debug( "loaded element in {} sec".format( i ) )
+            #print()
+            #print_debug( "loaded element in {} sec".format( i ) )
             return parent.find_element_by_xpath( name )
 
         i += 1
         sleep( 1, False )
 
-    print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
+    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
     exit()
 
 def find_elements_by_xpath_with_timeout( parent, name, timeout ):
     i = 0
 
-    print_debug( "waiting till loaded ", '', True );
+    #print_debug( "waiting till loaded ", '', True );
 
     while i <= timeout:
         if does_xpath_exist( parent, name ):
-            print()
-            print_debug( "loaded element in {} sec".format( i ) )
+            #print()
+            #print_debug( "loaded element in {} sec".format( i ) )
             return parent.find_elements_by_xpath( name )
 
         i += 1
         sleep( 1, False )
 
-    print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
+    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
     exit()
 
 def is_clickable( parent ):
@@ -209,18 +211,18 @@ def is_clickable( parent ):
 def wait_till_clickable( parent, timeout ):
     i = 0
 
-    print_debug( "waiting till clickable ", '', True );
+    #print_debug( "waiting till clickable ", '', True );
 
     while i <= timeout:
         if is_clickable( parent ):
-            print()
-            print_debug( "element is clickable in {} sec".format( i ) )
+            #print()
+            #print_debug( "element is clickable in {} sec".format( i ) )
             return
 
         i += 1
         sleep( 1, False )
 
-    print( "FATAL: element is not clickable in {} sec".format( timeout ) )
+    #print( "FATAL: element is not clickable in {} sec".format( timeout ) )
     exit()
 
 def wait_till_clickable_and_click( parent, timeout ):
@@ -239,25 +241,25 @@ def get_optional_element_text_by_class_name( parent, class_name, default_value )
 
 def find_element_by_tag_name_and_attribute_name( driver, tag_name, attribute_name, attribute_val, is_whole_name = True ):
 
-    print_info( "looking for '{}' '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
+    #print_info( "looking for '{}' '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
 
     all_elems = driver.find_elements_by_tag_name( tag_name )
 
-    print_debug( "find_element_by_tag_name_and_attribute_name: all '{}' {}:".format( tag_name, len( all_elems ) ) )
+    #print_debug( "find_element_by_tag_name_and_attribute_name: all '{}' {}:".format( tag_name, len( all_elems ) ) )
 
     for i in all_elems:
         i_val = i.get_attribute( attribute_name )
-        print_debug( "find_element_by_tag_name_and_attribute_name: {} '{}' '{}'".format( i.text, attribute_name, i_val ) )
+        #print_debug( "find_element_by_tag_name_and_attribute_name: {} '{}' '{}'".format( i.text, attribute_name, i_val ) )
         if is_whole_name:
             if i_val == attribute_val:
-                print_debug( "find_element_by_tag_name_and_attribute_name: FOUND - {}".format( i_val ) )
+                #print_debug( "find_element_by_tag_name_and_attribute_name: FOUND - {}".format( i_val ) )
                 return i
         else:
             if attribute_val in i_val:
-                print_debug( "find_element_by_tag_name_and_attribute_name: FOUND - {} ".format( i_val ) )
+                #print_debug( "find_element_by_tag_name_and_attribute_name: FOUND - {} ".format( i_val ) )
                 return i
 
-    print_debug( "find_element_by_tag_name_and_attribute_name: not found - tag '{}' attr '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
+    #print_debug( "find_element_by_tag_name_and_attribute_name: not found - tag '{}' attr '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
 
     return None
 
@@ -269,10 +271,11 @@ def dump_elements_by_tag_name( driver, tag_name ):
 
     all_elems = driver.find_elements_by_tag_name( tag_name )
 
-    print( "dump_elements_by_tag_name: tag '{}', found {} element(s):".format( tag_name, len( all_elems ) ) )
+    #print( "dump_elements_by_tag_name: tag '{}', found {} element(s):".format( tag_name, len( all_elems ) ) )
 
-    for i in all_elems:
-        print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
+    #for i in all_elems:
+    #    pass
+    #    print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
 
 def quote_quotes( s ):
     res = s.replace( '"', '""' )
