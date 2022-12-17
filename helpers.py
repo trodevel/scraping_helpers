@@ -137,7 +137,7 @@ def does_xpath_exist( parent, name: str ):
 
     return False
 
-def does_xpath_exist_with_timeout( parent, name, timeout ):
+def does_xpath_exist_with_timeout( parent, name: str, timeout: int ):
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -183,7 +183,7 @@ def do_xpaths_exist_with_timeout( parent, names, timeout ):
     #print()
     return False, None, 0
 
-def find_element_by_xpath_with_timeout( parent, name, timeout ):
+def find_element_by_xpath_with_timeout( parent, name: str, timeout: int ):
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -199,7 +199,7 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
 
     raise Exception( f"cannot load element {name} in {timeout} sec" )
 
-def find_elements_by_xpath_with_timeout( parent, name, timeout ):
+def find_elements_by_xpath_with_timeout( parent, name: str, timeout: int ):
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -218,7 +218,7 @@ def find_elements_by_xpath_with_timeout( parent, name, timeout ):
 def is_clickable( parent ):
     return parent.is_enabled() and parent.is_displayed()
 
-def wait_till_clickable( parent, timeout ):
+def wait_till_clickable( parent, timeout: int ):
     i = 0
 
     #print_debug( "waiting till clickable ", '', True );
@@ -234,7 +234,7 @@ def wait_till_clickable( parent, timeout ):
 
     raise Exception( f"element is not clickable in {timeout} sec" )
 
-def wait_till_clickable_and_click( parent, timeout ):
+def wait_till_clickable_and_click( parent, timeout: int ):
 
     wait_till_clickable( parent, timeout )
 
@@ -286,11 +286,11 @@ def dump_elements_by_tag_name( driver, tag_name ):
     #    pass
     #    print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
 
-def quote_quotes( s ):
+def quote_quotes( s: str ):
     res = s.replace( '"', '""' )
     return res
 
-def to_csv_conform_string( s, separator = ';' ):
+def to_csv_conform_string( s: str, separator = ';' ):
 
     if s.find( separator ) != -1 or s.find( '"' ) != -1:
         return '"' + quote_quotes( s ) + '"'
@@ -299,7 +299,7 @@ def to_csv_conform_string( s, separator = ';' ):
 
 ##########################################################
 
-def harmonize_link( link ):
+def harmonize_link( link: str ):
 
     if link.endswith('/'):
         return link
