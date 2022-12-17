@@ -70,8 +70,7 @@ def wait_for_page_load_v1( driver, timeout=20 ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load page in {} sec".format( timeout ) )
-    exit()
+    raise Exception( f"cannot load page in {timeout} sec" )
 
 ##########################################################
 
@@ -198,8 +197,7 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
-    exit()
+    raise Exception( f"cannot load element {name} in {timeout} sec" )
 
 def find_elements_by_xpath_with_timeout( parent, name, timeout ):
     i = 0
@@ -215,8 +213,7 @@ def find_elements_by_xpath_with_timeout( parent, name, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
-    exit()
+    raise Exception( f"cannot load element {name} in {timeout} sec" )
 
 def is_clickable( parent ):
     return parent.is_enabled() and parent.is_displayed()
@@ -235,8 +232,7 @@ def wait_till_clickable( parent, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: element is not clickable in {} sec".format( timeout ) )
-    exit()
+    raise Exception( f"element is not clickable in {timeout} sec" )
 
 def wait_till_clickable_and_click( parent, timeout ):
 
