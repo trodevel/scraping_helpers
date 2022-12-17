@@ -37,7 +37,7 @@ def init_driver( driver_path, binary_location = "", cookie_dir = "", is_headless
 
 ##########################################################
 
-def sleep( sec, verbose = True ):
+def sleep( sec: int, verbose: bool = True ):
     if verbose:
         pass
         #print( "sleeping {} sec".format( sec ) )
@@ -56,7 +56,7 @@ def has_page_loaded( driver ):
 
 ##########################################################
 
-def wait_for_page_load_v1( driver, timeout=20 ):
+def wait_for_page_load_v1( driver, timeout: int = 20 ):
 
     i = 0
 
@@ -74,7 +74,7 @@ def wait_for_page_load_v1( driver, timeout=20 ):
 
 ##########################################################
 
-def wait_for_page_load_v3( driver, timeout=20 ):
+def wait_for_page_load_v3( driver, timeout: int = 20 ):
 
     #print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
     old_page = driver.find_element_by_tag_name('html')
@@ -83,7 +83,7 @@ def wait_for_page_load_v3( driver, timeout=20 ):
 
 ##########################################################
 
-def wait_for_page_load( driver, timeout=20 ):
+def wait_for_page_load( driver, timeout: int = 20 ):
 
     wait_for_page_load_v1( driver, timeout )
 
