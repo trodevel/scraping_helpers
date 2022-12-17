@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 #from print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
@@ -86,6 +87,18 @@ def wait_for_page_load_v3( driver, timeout=20 ):
 def wait_for_page_load( driver, timeout=20 ):
 
     wait_for_page_load_v1( driver, timeout )
+
+##########################################################
+
+def clean_up_and_type_text( element, text: str ):
+
+    element.send_keys( Keys.CONTROL + "a" )
+    element.send_keys( Keys.DELETE )
+    element.send_keys( text )
+
+def type_tab( element ):
+
+    element.send_keys( Keys.TAB )
 
 ##########################################################
 
