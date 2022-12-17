@@ -37,7 +37,7 @@ def init_driver( driver_path, binary_location = "", cookie_dir = "", is_headless
 
 ##########################################################
 
-def sleep( sec, verbose = True ):
+def sleep( sec: int, verbose: bool = True ):
     if verbose:
         pass
         #print( "sleeping {} sec".format( sec ) )
@@ -56,7 +56,7 @@ def has_page_loaded( driver ):
 
 ##########################################################
 
-def wait_for_page_load_v1( driver, timeout=20 ):
+def wait_for_page_load_v1( driver, timeout: int = 20 ):
 
     i = 0
 
@@ -70,12 +70,11 @@ def wait_for_page_load_v1( driver, timeout=20 ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load page in {} sec".format( timeout ) )
-    exit()
+    raise Exception( f"cannot load page in {timeout} sec" )
 
 ##########################################################
 
-def wait_for_page_load_v3( driver, timeout=20 ):
+def wait_for_page_load_v3( driver, timeout: int = 20 ):
 
     #print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
     old_page = driver.find_element_by_tag_name('html')
@@ -84,7 +83,7 @@ def wait_for_page_load_v3( driver, timeout=20 ):
 
 ##########################################################
 
-def wait_for_page_load( driver, timeout=20 ):
+def wait_for_page_load( driver, timeout: int = 20 ):
 
     wait_for_page_load_v1( driver, timeout )
 
@@ -102,7 +101,7 @@ def type_tab( element ):
 
 ##########################################################
 
-def does_class_exist( parent, class_name ):
+def does_class_exist( parent, class_name ) -> bool:
 
     elems = parent.find_elements_by_class_name( class_name )
 
@@ -111,7 +110,7 @@ def does_class_exist( parent, class_name ):
 
     return False
 
-def does_tag_exist( parent, name ):
+def does_tag_exist( parent, name: str ) -> bool:
 
     elems = parent.find_elements_by_tag_name( name )
 
@@ -120,7 +119,7 @@ def does_tag_exist( parent, name ):
 
     return False
 
-def does_css_selector_exist( parent, name ):
+def does_css_selector_exist( parent, name: str ) -> bool:
 
     elems = parent.find_elements_by_css_selector( name )
 
@@ -129,7 +128,7 @@ def does_css_selector_exist( parent, name ):
 
     return False
 
-def does_xpath_exist( parent, name ):
+def does_xpath_exist( parent, name: str ) -> bool:
 
     elems = parent.find_elements_by_xpath( name )
 
@@ -138,7 +137,7 @@ def does_xpath_exist( parent, name ):
 
     return False
 
-def does_xpath_exist_with_timeout( parent, name, timeout ):
+def does_xpath_exist_with_timeout( parent, name: str, timeout: int ) -> bool:
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -156,9 +155,9 @@ def does_xpath_exist_with_timeout( parent, name, timeout ):
     #print()
     return False
 
-def do_xpaths_exist( parent, names ):
+def do_xpaths_exist( parent, names: list ) -> [ bool, list, int ]:
 
-    i = 0
+    i: int = 0
     for n in names:
         if does_xpath_exist( parent, n ):
             return True, n, i
@@ -166,7 +165,7 @@ def do_xpaths_exist( parent, names ):
 
     return False, None, 0
 
-def do_xpaths_exist_with_timeout( parent, names, timeout ):
+def do_xpaths_exist_with_timeout( parent, names, timeout ) -> [ bool, list, int ]:
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -184,7 +183,7 @@ def do_xpaths_exist_with_timeout( parent, names, timeout ):
     #print()
     return False, None, 0
 
-def find_element_by_xpath_with_timeout( parent, name, timeout ):
+def find_element_by_xpath_with_timeout( parent, name: str, timeout: int ):
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -198,10 +197,9 @@ def find_element_by_xpath_with_timeout( parent, name, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
-    exit()
+    raise Exception( f"cannot load element {name} in {timeout} sec" )
 
-def find_elements_by_xpath_with_timeout( parent, name, timeout ):
+def find_elements_by_xpath_with_timeout( parent, name: str, timeout: int ):
     i = 0
 
     #print_debug( "waiting till loaded ", '', True );
@@ -215,13 +213,12 @@ def find_elements_by_xpath_with_timeout( parent, name, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: cannot load element {} in {} sec".format( name, timeout ) )
-    exit()
+    raise Exception( f"cannot load element {name} in {timeout} sec" )
 
-def is_clickable( parent ):
+def is_clickable( parent ) -> bool:
     return parent.is_enabled() and parent.is_displayed()
 
-def wait_till_clickable( parent, timeout ):
+def wait_till_clickable( parent, timeout: int ):
     i = 0
 
     #print_debug( "waiting till clickable ", '', True );
@@ -235,10 +232,9 @@ def wait_till_clickable( parent, timeout ):
         i += 1
         sleep( 1, False )
 
-    #print( "FATAL: element is not clickable in {} sec".format( timeout ) )
-    exit()
+    raise Exception( f"element is not clickable in {timeout} sec" )
 
-def wait_till_clickable_and_click( parent, timeout ):
+def wait_till_clickable_and_click( parent, timeout: int ):
 
     wait_till_clickable( parent, timeout )
 
@@ -290,11 +286,11 @@ def dump_elements_by_tag_name( driver, tag_name ):
     #    pass
     #    print( "class '{}', id '{}'".format( i.get_attribute( 'class' ), i.get_attribute( 'id' ) ) )
 
-def quote_quotes( s ):
+def quote_quotes( s: str ) -> str:
     res = s.replace( '"', '""' )
     return res
 
-def to_csv_conform_string( s, separator = ';' ):
+def to_csv_conform_string( s: str, separator = ';' ) -> str:
 
     if s.find( separator ) != -1 or s.find( '"' ) != -1:
         return '"' + quote_quotes( s ) + '"'
@@ -303,7 +299,7 @@ def to_csv_conform_string( s, separator = ';' ):
 
 ##########################################################
 
-def harmonize_link( link ):
+def harmonize_link( link: str ) -> str:
 
     if link.endswith('/'):
         return link
