@@ -110,7 +110,7 @@ def does_class_exist( parent, class_name ):
 
     return False
 
-def does_tag_exist( parent, name ):
+def does_tag_exist( parent, name: str ):
 
     elems = parent.find_elements_by_tag_name( name )
 
@@ -119,7 +119,7 @@ def does_tag_exist( parent, name ):
 
     return False
 
-def does_css_selector_exist( parent, name ):
+def does_css_selector_exist( parent, name: str ):
 
     elems = parent.find_elements_by_css_selector( name )
 
@@ -128,7 +128,7 @@ def does_css_selector_exist( parent, name ):
 
     return False
 
-def does_xpath_exist( parent, name ):
+def does_xpath_exist( parent, name: str ):
 
     elems = parent.find_elements_by_xpath( name )
 
