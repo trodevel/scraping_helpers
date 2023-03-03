@@ -215,6 +215,14 @@ def find_elements_by_xpath_with_timeout( parent, name: str, timeout: int ):
 
     raise Exception( f"cannot load element {name} in {timeout} sec" )
 
+##########################################################
+
+def scroll_to_bottom( parent ):
+
+    parent.execute_script( "window.scrollTo(0, document.body.scrollHeight);" )
+
+##########################################################
+
 def is_clickable( parent ) -> bool:
     return parent.is_enabled() and parent.is_displayed()
 
