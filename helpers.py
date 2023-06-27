@@ -2,7 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-#from print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
+#from print_helpers.print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
 
