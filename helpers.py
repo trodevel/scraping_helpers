@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 #from print_helpers.print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
@@ -31,7 +32,9 @@ def init_driver( driver_path, binary_location = "", cookie_dir = "", is_headless
     if cookie_dir:
         options.add_argument( "user-data-dir=" + cookie_dir )
 
-    driver = webdriver.Chrome( options=options, executable_path=driver_path )
+    service = Service( executable_path=driver_path )
+
+    driver = webdriver.Chrome( options=options, service=service )
 
     return driver
 
