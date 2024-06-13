@@ -66,7 +66,7 @@ def type_tab( element ):
 
 def does_class_exist( parent, class_name ) -> bool:
 
-    elems = parent.find_elements_by_class_name( class_name )
+    elems = parent.find_elements( 'class_name', class_name )
 
     if len( elems ) > 0 :
         return True
