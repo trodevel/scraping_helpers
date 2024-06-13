@@ -84,7 +84,7 @@ def does_tag_exist( parent, name: str ) -> bool:
 
 def does_css_selector_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_css_selector( name )
+    elems = parent.find_elements( 'css_selector', name )
 
     if len( elems ) > 0 :
         return True
