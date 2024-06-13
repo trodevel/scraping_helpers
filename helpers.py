@@ -3,6 +3,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 #from print_helpers.print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
@@ -49,46 +50,6 @@ def sleep( sec: int, verbose: bool = True ):
         #print( '.', end='', flush=True )
 
     time.sleep( sec )
-
-##########################################################
-
-def has_page_loaded( driver ):
-    #self.log.info("Checking if {} page is loaded.".format(self.driver.current_url))
-    page_state = driver.execute_script('return document.readyState;')
-    return page_state == 'complete'
-
-##########################################################
-
-def wait_for_page_load_v1( driver, timeout: int = 20 ):
-
-    i = 0
-
-    #print_debug( "waiting ", '', True );
-
-    while i <= timeout:
-        if has_page_loaded( driver ):
-            #print()
-            #print_debug( "loaded page in {} sec".format( i ) )
-            return
-        i += 1
-        sleep( 1, False )
-
-    raise Exception( f"cannot load page in {timeout} sec" )
-
-##########################################################
-
-def wait_for_page_load_v3( driver, timeout: int = 20 ):
-
-    #print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
-    old_page = driver.find_element_by_tag_name('html')
-    yield
-    WebDriverWait(driver, timeout).until(staleness_of(old_page))
-
-##########################################################
-
-def wait_for_page_load( driver, timeout: int = 20 ):
-
-    wait_for_page_load_v1( driver, timeout )
 
 ##########################################################
 
