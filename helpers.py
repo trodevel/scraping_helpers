@@ -75,7 +75,7 @@ def does_class_exist( parent, class_name ) -> bool:
 
 def does_tag_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_tag_name( name )
+    elems = parent.find_elements( 'tag_name',  name )
 
     if len( elems ) > 0 :
         return True
@@ -223,7 +223,7 @@ def find_element_by_tag_name_and_attribute_name( driver, tag_name, attribute_nam
 
     #print_info( "looking for '{}' '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
 
-    all_elems = driver.find_elements_by_tag_name( tag_name )
+    all_elems = driver.find_elements( 'tag_name',  tag_name )
 
     #print_debug( "find_element_by_tag_name_and_attribute_name: all '{}' {}:".format( tag_name, len( all_elems ) ) )
 
@@ -249,7 +249,7 @@ def find_element_by_tag_and_class_name( driver, tag_name, class_name, is_whole_n
 
 def dump_elements_by_tag_name( driver, tag_name ):
 
-    all_elems = driver.find_elements_by_tag_name( tag_name )
+    all_elems = driver.find_elements( 'tag_name',  tag_name )
 
     #print( "dump_elements_by_tag_name: tag '{}', found {} element(s):".format( tag_name, len( all_elems ) ) )
 
