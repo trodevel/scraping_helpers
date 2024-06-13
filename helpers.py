@@ -3,7 +3,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 #from print_helpers.print_helpers import print_fatal, print_error, print_warning, print_info, print_debug
 
 import time
@@ -94,7 +93,7 @@ def does_css_selector_exist( parent, name: str ) -> bool:
 
 def does_xpath_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_xpath( name )
+    elems = parent.find_elements( 'xpath', name )
 
     if len( elems ) > 0 :
         return True
@@ -156,7 +155,7 @@ def find_element_by_xpath_with_timeout( parent, name: str, timeout: int ):
         if does_xpath_exist( parent, name ):
             #print()
             #print_debug( "loaded element in {} sec".format( i ) )
-            return parent.find_element_by_xpath( name )
+            return parent.find_element( 'xpath', name )
 
         i += 1
         sleep( 1, False )
@@ -172,7 +171,7 @@ def find_elements_by_xpath_with_timeout( parent, name: str, timeout: int ):
         if does_xpath_exist( parent, name ):
             #print()
             #print_debug( "loaded element in {} sec".format( i ) )
-            return parent.find_elements_by_xpath( name )
+            return parent.find_elements( 'xpath', name )
 
         i += 1
         sleep( 1, False )
@@ -215,7 +214,7 @@ def wait_till_clickable_and_click( parent, timeout: int ):
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
-        div = parent.find_element_by_class_name( class_name )
+        div = parent.find_element( 'class_name', class_name )
         return div.text
 
     return default_value
