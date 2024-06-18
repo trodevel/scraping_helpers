@@ -52,46 +52,6 @@ def sleep( sec: int, verbose: bool = True ):
 
 ##########################################################
 
-def has_page_loaded( driver ):
-    #self.log.info("Checking if {} page is loaded.".format(self.driver.current_url))
-    page_state = driver.execute_script('return document.readyState;')
-    return page_state == 'complete'
-
-##########################################################
-
-def wait_for_page_load_v1( driver, timeout: int = 20 ):
-
-    i = 0
-
-    #print_debug( "waiting ", '', True );
-
-    while i <= timeout:
-        if has_page_loaded( driver ):
-            #print()
-            #print_debug( "loaded page in {} sec".format( i ) )
-            return
-        i += 1
-        sleep( 1, False )
-
-    raise Exception( f"cannot load page in {timeout} sec" )
-
-##########################################################
-
-def wait_for_page_load_v3( driver, timeout: int = 20 ):
-
-    #print_debug( "waiting for page to load at {}.".format( driver.driver.current_url ) )
-    old_page = driver.find_element_by_tag_name('html')
-    yield
-    WebDriverWait(driver, timeout).until(staleness_of(old_page))
-
-##########################################################
-
-def wait_for_page_load( driver, timeout: int = 20 ):
-
-    wait_for_page_load_v1( driver, timeout )
-
-##########################################################
-
 def clean_up_and_type_text( element, text: str ):
 
     element.send_keys( Keys.CONTROL + "a" )
@@ -106,7 +66,7 @@ def type_tab( element ):
 
 def does_class_exist( parent, class_name ) -> bool:
 
-    elems = parent.find_elements_by_class_name( class_name )
+    elems = parent.find_elements( 'class_name', class_name )
 
     if len( elems ) > 0 :
         return True
@@ -115,7 +75,7 @@ def does_class_exist( parent, class_name ) -> bool:
 
 def does_tag_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_tag_name( name )
+    elems = parent.find_elements( 'tag_name',  name )
 
     if len( elems ) > 0 :
         return True
@@ -124,7 +84,7 @@ def does_tag_exist( parent, name: str ) -> bool:
 
 def does_css_selector_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_css_selector( name )
+    elems = parent.find_elements( 'css_selector', name )
 
     if len( elems ) > 0 :
         return True
@@ -133,7 +93,7 @@ def does_css_selector_exist( parent, name: str ) -> bool:
 
 def does_xpath_exist( parent, name: str ) -> bool:
 
-    elems = parent.find_elements_by_xpath( name )
+    elems = parent.find_elements( 'xpath', name )
 
     if len( elems ) > 0 :
         return True
@@ -195,7 +155,7 @@ def find_element_by_xpath_with_timeout( parent, name: str, timeout: int ):
         if does_xpath_exist( parent, name ):
             #print()
             #print_debug( "loaded element in {} sec".format( i ) )
-            return parent.find_element_by_xpath( name )
+            return parent.find_element( 'xpath', name )
 
         i += 1
         sleep( 1, False )
@@ -211,7 +171,7 @@ def find_elements_by_xpath_with_timeout( parent, name: str, timeout: int ):
         if does_xpath_exist( parent, name ):
             #print()
             #print_debug( "loaded element in {} sec".format( i ) )
-            return parent.find_elements_by_xpath( name )
+            return parent.find_elements( 'xpath', name )
 
         i += 1
         sleep( 1, False )
@@ -254,7 +214,7 @@ def wait_till_clickable_and_click( parent, timeout: int ):
 def get_optional_element_text_by_class_name( parent, class_name, default_value ):
 
     if does_class_exist( parent, class_name ):
-        div = parent.find_element_by_class_name( class_name )
+        div = parent.find_element( 'class_name', class_name )
         return div.text
 
     return default_value
@@ -263,7 +223,7 @@ def find_element_by_tag_name_and_attribute_name( driver, tag_name, attribute_nam
 
     #print_info( "looking for '{}' '{}' = '{}':".format( tag_name, attribute_name, attribute_val ) )
 
-    all_elems = driver.find_elements_by_tag_name( tag_name )
+    all_elems = driver.find_elements( 'tag_name',  tag_name )
 
     #print_debug( "find_element_by_tag_name_and_attribute_name: all '{}' {}:".format( tag_name, len( all_elems ) ) )
 
@@ -289,7 +249,7 @@ def find_element_by_tag_and_class_name( driver, tag_name, class_name, is_whole_n
 
 def dump_elements_by_tag_name( driver, tag_name ):
 
-    all_elems = driver.find_elements_by_tag_name( tag_name )
+    all_elems = driver.find_elements( 'tag_name',  tag_name )
 
     #print( "dump_elements_by_tag_name: tag '{}', found {} element(s):".format( tag_name, len( all_elems ) ) )
 
