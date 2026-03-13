@@ -2,6 +2,7 @@
 
 import nodriver as uc
 import asyncio
+import json
 
 ##########################################################
 
@@ -49,5 +50,15 @@ async def does_xpath_exist_with_timeout(page, xpath: str, timeout: int) -> bool:
         return True
     except:
         return False
+
+##########################################################
+
+async def set_textarea_value(page, selector, text):
+    # Escape the text so it doesn't break the JS string
+    escaped_text = json.dumps(text)
+    # Use a CSS selector to set the value directly
+    await page.evaluate(f'document.querySelector("{selector}").value = {escaped_text}')
+    # Trigger an "input" event so the site realizes the text has changed
+    await page.evaluate(f'document.querySelector("{selector}").dispatchEvent(new Event("input", {{ bubbles: true }}))')
 
 ##########################################################
