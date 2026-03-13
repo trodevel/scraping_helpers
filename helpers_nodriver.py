@@ -15,8 +15,7 @@ async def clean_up_and_type_text(element: uc.Element, text: str):
 ##########################################################
 
 async def type_tab(page: uc.Tab):
-    await page.key_down("Tab")
-    await page.key_up("Tab")
+    await page.send_keys('\t')
 
 ##########################################################
 
