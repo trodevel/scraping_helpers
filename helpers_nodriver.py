@@ -62,3 +62,14 @@ async def set_textarea_value(page, selector, text):
     await page.evaluate(f'document.querySelector("{selector}").dispatchEvent(new Event("input", {{ bubbles: true }}))')
 
 ##########################################################
+
+async def upload_files( page, file_input, file_paths ):
+
+    await page.send(
+        uc.cdp.dom.set_file_input_files(
+            files=file_paths,
+            backend_node_id=file_input.backend_node_id
+        )
+    )
+
+##########################################################
